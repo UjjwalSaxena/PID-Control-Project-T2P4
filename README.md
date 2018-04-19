@@ -1,7 +1,5 @@
 # PID-Control-Project-T2P4
 
-Udacity Self-Driving Car Nanodegree - PID Control project
-
 # Introduction
 
 In this project I have implemented a [PID controller](https://en.wikipedia.org/wiki/PID_controller) to control a car in Udacity's simulator([it could be downloaded here](https://github.com/udacity/self-driving-car-sim/releases)). PID control is used here to adjust a car to the recieved values of speed and angle. The simulator sends cross-track error(which is the error in the car position with respect to the lane center), speed and angle to the PID controller(PID) and the contoller responds back with the steering angle ([-1, 1] normalized) and the throttle to drive the car.
@@ -18,10 +16,17 @@ In this project I have implemented a [PID controller](https://en.wikipedia.org/w
 
 I arrived at the final values of the hyperparameters by manual trial and error approach. I used the same value of Kp as was given in Udacity's lessons. I tried using only P controller but found that the car was oscillating to much. Then I used a Kd of 5.0 which allowed the car to have a term of differential error according to the change in the CTE. I have kept the Integral coefficient small enough. Integral error is minimized to smoothen the adjustment of the car to the desired values.
 
+Without Integral part of the controller the car may drive well and stay on the road but might still have a sustained error which will not change with time. The integral part measures this sustained error and lets the system know that it has maintained a certain error value(or the car is away from the lane center for quite some time) and helps minimizing it, so that the car can drive in center of the lane and not smoothly return back if it deviates from the center.
+
 My final Hyper parameters are as below:
 #### P: 0.2 
 #### I: 0.00004 
 #### D: 5.0
+
+
+### Hardware Issues:
+
+The simulator doesn't works very well on low end systems without inbuilt GPU or high RAM. It sometimes feeds the controller with cte at irregular time intervals making it difficult for the car to drive at a high speed. I initially took the throttle value 0.05 which was way too less than the default 0.3. Then I tried it on another system at 0.4.
 
 ## Simulation
 
