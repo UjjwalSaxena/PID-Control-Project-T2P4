@@ -37,9 +37,10 @@ void PID::UpdateError(double cte) {
     // double curr_timestamp= std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count(); 
     // delta_t= (curr_timestamp- timestamp)/1000;
     // std::cout << " td:"<<delta_t;
-    d_error = (cte - p_error);///delta_t ;
-    p_error = cte;
-    i_error += cte;
+    // d_error = (cte - p_error);/delta_t ;
+    d_error = (cte - p_error); // differential error
+    p_error = cte; // proportional error
+    i_error += cte; // integral error
     // today = high_resolution_clock::now();
     // std::time_t tt = high_resolution_clock::to_time_t ( today );
     // // std::cout << "today is: " << ctime(&tt)<<" ts:"<<tt;
